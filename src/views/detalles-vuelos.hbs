@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vuelos</title>
+</head>
+<body class="row">
+    <div class="card-body d-flex justify-content-around align-items-center">
+		<h2>Detalles</h2>
+	</div>
+    <div class=" col-md-10" style="margin-left: 30px;">
+                {{!-- {{#each vuelo}}
+                    {{nombreVuelo}}
+                    {{origen}}
+                        <button class="btn btn-danger">Eliminar</button>
+                {{/each}} --}}
+    
+        <h3>Nombrel del vuelo</h3>
+        {{vuelo.nombreVuelo}}
+        <br>
+        <h3>Origen - Destino</h3>
+        {{vuelo.origen}} - {{vuelo.destino}}
+
+        <br><h3>Clientes</h3>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Usuario</th>
+                        <th>Equipaje</th>
+                        <td>Acciones</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each vuelo.clientes}}
+                    <tr>
+                        <td>{{nombre}}</td>
+                            {{!-- <a href="/asistir-vuelo/{{_id}}" class="btn btn-success">Asistir</a>
+                            <a href="" class="btn btn-danger">Denegar</a> --}}
+                        <td>Dos maletas de 5kg</td>
+                        <td><a href="" class="btn btn-danger">Quitar del vuelo</a> </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+
+    </div>
+
+</body>
+</html>

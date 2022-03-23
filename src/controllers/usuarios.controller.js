@@ -107,10 +107,10 @@ usuariosController.signin = async (req, res) => {
                 // localStorage.setItem('token',res.token);
                 // localStorage.setItem('IDU', res.idUsuario);
                 // localStorage.setItem('TipoUsr', res.tipoUsuario);
-                return res.redirect('/vuelos-cliente')
+                return res.redirect('/ver-vuelos-cliente')
             }else if (usuarioIngresado.usuarioEmpleado){
                 tipoUsuario = "empleado";
-                return res.redirect('/vuelos-empleado')
+                return res.redirect('/ver-vuelos-empleado')
             }
 
             console.log("El usuario es valido")

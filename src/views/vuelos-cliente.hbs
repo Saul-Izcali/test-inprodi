@@ -13,36 +13,36 @@
     <div class=" col-md-10" style="margin-left: 30px;">
         <table class="table table-bordered table-hover">
             <thead>
-                <th>Nombre</th>
-                <th>Origen</th>
-                <th>Destino</th>
-                <th>Fecha partida</th>
-                <th>fecha llegada</th>
-                <th>Cupo</th>
-                <td>Acciones</td>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Origen</th>
+                    <th>Destino</th>
+                    <th>Fecha partida</th>
+                    <th>fecha llegada</th>
+                    <th>Cupo</th>
+                    <td>Acciones</td>
+                </tr>
             </thead>
             <tbody>
+                {{#each vuelos}}
                 <tr>
-                    <td>Vuelo 1</td>
-                    <td>Gdl</td>
-                    <td>NY</td>
-                    <td>22-03-22 17:00</td>
-                    <td>22-03-22 22:00</td>
-                    <td>6 personas</td>
+                    <td>{{nombreVuelo}}</td>
+                    <td>{{origen}}</td>
+                    <td>{{destino}}</td>
+                    <td>{{tiempoPartida}}</td>
+                    <td>{{tiempoLlegada}}</td>
+                    <td>{{capacidadTotal}}</td>
                     <td>
-                        <button class="btn btn-success">Asistir</button>
-                        <button class="btn btn-danger">Denegar</button>
+                        {{!-- <button class="btn btn-success">Asistir</button>
+                        <button class="btn btn-danger">Denegar</button> --}}
+                        <a href="/asistir-vuelo/{{_id}}" class="btn btn-success">Asistir</a>
+                        <a href="" class="btn btn-danger">Denegar</a>
                     </td>
                 </tr>
+                {{/each}}
             </tbody>
         </table>
     </div>
-
-
-    {{!-- <ul>
-        {{#each variable}}
-        <li>{{nombre}}</li>
-    </ul> --}}
 
 
 </body>

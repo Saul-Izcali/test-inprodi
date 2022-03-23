@@ -8,11 +8,11 @@ const vuelosSchema = new Schema({
 	tiempoLlegada: {type: Date, required: true},
 	capacidadTotal: {type: Number, required: true},
 	capacidadActual: {type: Number, required: false},
-    clientes: {
+    clientes: [{
         identificador: {type: String, required: false},
         nombre: {type: String, required: false},
         equipaje: {type: String, required: false},
-    }
+    }]
 },  {
     timestamps: true,
     versionKey: false
