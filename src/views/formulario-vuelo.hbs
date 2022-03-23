@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear vuelo</title>
+</head>
+<body>
+        <div class="col-md-4 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                <h3>Crear vuelo</h3>
+            </div>
+        </div>
+        <div class="card-body">
+            <form action="/crear-vuelo" method="POST">
+                <div class="form-group">
+                    <input type="text" name="nombreVuelo" class="form-control input-form" placeholder="Nombre del vuelo" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="origen" class="form-control input-form" placeholder="Ciudad de partida" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="destino" class="form-control input-form" placeholder="Ciudad de llegada" required>
+                </div>
+                <div class="form-group">
+                    <input type="date" name="tiempoPartida" class="form-control input-form" placeholder="Tiempo de partida" required>
+                </div>
+                <div class="form-group">
+                    <input type="date" name="tiempoLlegada" class="form-control input-form" placeholder="Tiempo de llegada" required>
+                </div>
+                <div class="form-group">
+                    <input type="number" name="capacidadTotal" class="form-control input-form" placeholder="Capacidad de pasajeros" required>
+                </div>
+                <div class="form-group">
+                    <button type="text"class="btn btn-primary btn-block" type="submit">
+                        Crear
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

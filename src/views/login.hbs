@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingresar</title>
+</head>
+<body class="fondo-avion">
+    
+    <div class="col-md-4 mx-auto">
+                <h2>Ingresa a tu cuenta</h2>
+        <div class="card-body">
+            <form action="/login" method="POST">
+                <div class="form-group">
+                    <input type="text" name="usuario" class="form-control input-form" placeholder="Nombre de usuario" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="contrasena" class="form-control input-form" placeholder="Contraseña" required>
+                </div>
+                <div class="form-group">
+                    <button type="text"  class="btn btn-primary btn-block input-form" type="submit">
+                        Ingresar
+                    </button>
+                </div>
+            </form>
+                    <button type="text" name="contrasena" class="btn btn-secondary btn-block input-form" onclick="location.href='./formulario-cliente'">
+                        Crear cuenta
+                    </button>
+        </div>
+    </div>
+
+</body>
+</html>
