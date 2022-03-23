@@ -1,19 +1,40 @@
+import { body, param } from "express-validator";
+import { Types } from "mongoose";
+
 const usuariosController = {};
+
+import { createValidator } from "../helpers";
 
 const vuelosM = require('../model/Vuelos');
 
+const createFlightValidation = createValidator([
+    body("nombreVuelo").notEmpty(),
+	body("origen").notEmpty(),
+	body("destino").notEmpty().isLength({ min : 2 }),
+	body("tiempoPartida").customSanitizer(Date).isDate(),
+	body("tiempoLlegada").customSanitizer(Date).isDate(),
+	body("capacidadTotal").customSanitizer(Number).custom(value => !isNaN(value) && value >= 5 && value <= 200),
+	body("capacidadActual").isDate(),
+]);
 
-usuariosController.crearVuelo = async (req, res) => {
-    const nuevoVuelo = new vuelosM(req.body);
+const createFlightRoute = async (req, res) => {
+    try {
+        const { tiempoPartida, tiempoLlegada } = req.body;
 
-    console.log(nuevoVuelo)
+        const validHours = await FlightModel.verifyFlightHours(tiempoPartida, tiempoLlegada);
 
-    nuevoVuelo.capacidadActual = 0
-    await nuevoVuelo.save();
+        await FlightModel.create(req.body);
+    
+        // res.status(200).json({'estado': 'ok'})
+        return res.redirect('ver-vuelos-empleado')
+    } catch (err) {
+        RocketLogger.error(err);
 
-    // res.status(200).json({'estado': 'ok'})
-    res.redirect('ver-vuelos-empleado')
+        return res.status(500).send({ err : "Couldn't create flight" });
+    }
 };
+
+export const createFlight = [createFlightValidation, createFlightRoute];
 
 
 usuariosController.vuelosCliente = async (req, res) => {
@@ -51,22 +72,45 @@ usuariosController.asistirVuelo = async (req, res) => {
     res.render("vuelos-cliente", {vuelos: vuelos})
 };
 
-usuariosController.modificarVuelo = async (req, res) => {
-    const obtenerVuelo = await vuelosM.findById(req.params.id).lean();
-    
-    console.log(obtenerVuelo)
+const flightDetailValidation = createValidator([
+    param("id").notEmpty().isMongoId(),
+]);
 
-    // await vuelosM.findByIdAndUpdate(req.params.id, obtenerVuelo);
+const flightDetailRoute = async (req, res) => {
+    try {
+        const flight = await FlightModel.aggregate([
+            { $match : {
+                _id : new Types.ObjectId(req.params.id),
+            } },
+            {
+                $lookup : {
+                    from         : "users",
+                    localField   : "clientsIds",
+                    foreignField : "_id",
+                    as           : "users",
+                },
+            },
+            {
+                $project : {
+                    "users.name"    : 1,
+                    "users.luggage" : 1,
+                },
+            },
+        ]).exec()
 
-    // console.log("vuelo editado")
+        if (!flight) {
+            return res.status(404).send({ err : "Flight not found." });
+        }
 
-    // const vuelos = await vuelosM.find().lean();
-    
-    res.render("detalles-vuelos", {vuelo: obtenerVuelo})
+        return res.render("detalles-vuelos", { flight });
+    } catch (err) {
+        console.error("[vuelos.controller -> flightDetail] ", err);
+
+        return res.status(500).send({ err : "Couldn't load flitht details" });
+    }
 };
 
-
-
+export const flightDetail = [flightDetailValidation, flightDetailRoute];
 
 
 module.exports = usuariosController;

@@ -1,5 +1,9 @@
+import * as resources from "../access/resources";
+
+
 const { Router } = require('express');
 const vuelosController = require('../controllers/vuelos.controller');
+
 
 const router = Router();
 
@@ -18,7 +22,7 @@ router.post('/crear-vuelo', vuelosController.crearVuelo)
 
 router.get('/asistir-vuelo/:id', vuelosController.asistirVuelo)
 
-router.get('/modificar-vuelo/:id', vuelosController.modificarVuelo)
+// router.get('/modificar-vuelo/:id', withPermission(_ => _.delete(resources.FLIGHTS)), flightDetail)
 // router.get('/ver-vuelos', vuelosController.verVuelos)
 
 
