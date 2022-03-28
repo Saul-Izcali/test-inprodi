@@ -11,9 +11,11 @@ const optionsPagination = {
     limit: 10
 };
 
+
 flightsController.createFlight = async (req, res) => {
     try {
         const newFlights = new FlightsModel(req.body);
+        console.log(newFlights)
     
         await newFlights.save();
         console.log("Flight created");
@@ -65,6 +67,21 @@ flightsController.getFlightsFilterByDate = async (req, res) => {
 
         return res.status(200).json(flights)
 
+    } catch (error) {
+        // RocketLogger.error(err);
+        return res.status(500).send({ err : "Couldn't see flight" });
+    }
+};
+
+
+flightsController.deleteUsersFlight = async (req, res) => {
+    try {
+
+        // pasar por el params el vuelo seleccionado
+        // pasar por el body los usuarios a elimar
+        console.log(req.params)
+        console.log(req.body)
+        return res.status(200).json({message: "user deleted"})
     } catch (error) {
         // RocketLogger.error(err);
         return res.status(500).send({ err : "Couldn't see flight" });

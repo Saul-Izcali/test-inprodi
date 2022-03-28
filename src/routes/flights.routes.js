@@ -23,5 +23,6 @@ router.get('/show-flights-paginate/', verifyToken, isEmployee, flightsController
 router.post('/show-flights-by-name/', verifyToken, isEmployee, flightFilterByName, flightsController.getFlightsFilterByName);
 router.post('/show-flights-by-date/', verifyToken, isEmployee, flightFilterByDate, flightsController.getFlightsFilterByDate);
     // en estos casos es mejor dejarlo asi o que sea una peticion del tipo get y pasar el dato por params
+router.put('/delete-users-flight/:id', verifyToken, isEmployee, flightsController.deleteUsersFlight);
 
 export default router;

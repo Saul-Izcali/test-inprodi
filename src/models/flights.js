@@ -21,6 +21,6 @@ const flightsSchema = new Schema({
 
 flightsSchema.plugin(mongoosePaginate);
 
-const FlightsModel = model('flight', flightsSchema, "flights");
+const FlightsModel = model('Flight', flightsSchema, "flights");
 
 export default FlightsModel;
