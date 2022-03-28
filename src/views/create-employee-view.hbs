@@ -4,44 +4,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrate</title>
+    <title>Registrar</title>
 </head>
 <body>
     
     <div class="col-md-4 mx-auto">
         <div class="card">
             <div class="card-header">
-                <h3>Registrate</h3>
+                <h3>Registrar</h3>
             </div>
         </div>
         <div class="card-body">
-            <form action="/crear-empleado" method="POST">
+            <form action="/create-user" method="POST">
                 <div class="form-group">
-                    <input type="text" name="nombre" class="form-control input-form" placeholder="Nombre(s)" required>
+                    <input type="text" name="name" class="form-control input-form" placeholder="Nombre(s)" required>
                 </div>
                 <div class="form-group">
-                    <input type="text" name="aPaterno" class="form-control input-form" placeholder="Apellido paterno" required>
+                    <input type="text" name="lastName" class="form-control input-form" placeholder="Apellidos" required>
                 </div>
                 <div class="form-group">
-                    <input type="text" name="aMaterno" class="form-control input-form" placeholder="Apellido materno" required>
+                    <input type="text" name="phone" class="form-control input-form" placeholder="Numero de celular" required>
                 </div>
                 <div class="form-group">
-                    <input type="text" name="celular" class="form-control input-form" placeholder="Numero de celular" required>
+                    <input type="text" name="userName" class="form-control input-form" placeholder="Nombre de usuario" required>
                 </div>
                 <div class="form-group">
-                    <input type="text" name="usuario" class="form-control input-form" placeholder="Nombre de usuario" required>
-                </div>
-                <div class="form-group">
-                    <input type="text" name="contrasena" class="form-control input-form" placeholder="Contraseña" required>
+                    <input type="text" name="password" class="form-control input-form" placeholder="Contraseña" required>
                 </div>
                 <div class="form-group" >
-                    <select name="puesto" id="puesto" class="form-control input-form">
+                    <select name="position" id="puesto" class="form-control input-form">
                         <option value="piloto">Piloto</option>
                         <option value="azafata">Azafata</option>
                         <option value="ingeniero">Ingeniero</option>
                         <option value="centro">Jefe de centro</option>
                     </select>
                 </div>
+                <input type="hidden" name="roles" value="employee">
                 <div class="form-group">
                     <button type="text"class="btn btn-primary btn-block" type="submit">
                         Registrar
