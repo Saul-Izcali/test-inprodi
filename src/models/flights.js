@@ -1,9 +1,9 @@
 import {  Schema, model  } from 'mongoose'
-
+import   mongoosePaginate  from 'mongoose-paginate-v2'
 // import { verifyFlightHours } from "src/methods/flight.methods";
 
 const flightsSchema = new Schema({
-	nameFligth      : {type: String, required: true},
+	nameFlight      : {type: String, required: true},
 	origin          : {type: String, required: true},
 	destination     : {type: String, required: true},
 	startTime       : {type: Date, required: true},
@@ -18,6 +18,8 @@ const flightsSchema = new Schema({
 );
 
 // vuelosSchema.method.verifyFlightHours = verifyFlightHours.bind(flightsSchema);
+
+flightsSchema.plugin(mongoosePaginate);
 
 const FlightsModel = model('flight', flightsSchema, "flights");
 

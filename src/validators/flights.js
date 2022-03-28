@@ -5,7 +5,7 @@ import { body, check } from "express-validator";
 import validateResult from '../helpers/validateHerlper';
 
 const createFlightValidation = [
-    body("nameFligth").notEmpty(),
+    body("nameFlight").notEmpty(),
 	body("origin").notEmpty().isLength({ min : 2 }),
 	body("destination").notEmpty().isLength({ min : 2 }),
 	body("startTime").isDate().notEmpty(),
@@ -16,4 +16,19 @@ const createFlightValidation = [
     }
 ];
 
-export default createFlightValidation;
+const flightFilterByName = [
+	body("nameFligth").notEmpty(),
+	(req, res, next) => {
+        validateResult(req, res, next)
+    }
+];
+
+const flightFilterByDate = [
+	body("start").notEmpty().isDate(),
+	body("end").notEmpty().isDate(),
+	(req, res, next) => {
+        validateResult(req, res, next)
+    }
+];
+
+export  {createFlightValidation, flightFilterByName, flightFilterByDate};
