@@ -12,6 +12,7 @@ const userSchema = new Schema({
 	lastName        : { type : String, required: false},
 	phone           : { type : String, required: false},
     position        : { type : String },
+    travelPoints    : { type : Number, default : 0 },
     flights         : [{ref: "Flight",  type : Schema.Types.ObjectId}], 
     roles           : [{ref: "Role",    type : Schema.Types.ObjectId}]
     // account_type    : { type : String, enum : Object.values(roles) },

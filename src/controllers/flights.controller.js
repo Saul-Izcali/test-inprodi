@@ -109,7 +109,10 @@ flightsController.acceptFlightInvitation = async (req, res) => {
             }
         });
 
-        await FlightsModel.findByIdAndUpdate(req.params.id, flight);
+        const user = await UsersModel.findById(req.body.userId);
+        let addPoints = user.travelPoints + flight.costPerSeat * 0.1
+
+        await FlightsModel.findByIdAndUpdate(req.params.id, {flight, travelPoints : addPoints});
 
         return res.status(200).json({message: "user accepted"})
 
@@ -175,11 +178,14 @@ flightsController.subscribeFlight = async (req, res) => {
 
         // now also have to uptdate the user document
         const user = await UsersModel.findById(req.body.userId);
+
+        let addPoints = user.travelPoints + flight.costPerSeat * 0.1 // add 10% of the cost of the flight to travelPoints
         
         user.flights.push([flight._id]);
-        await UsersModel.findByIdAndUpdate(user._id, {flights: user.flights})
 
-        return res.status(200).json({message: "user subscribe to flight"});
+        await UsersModel.findByIdAndUpdate(user._id, {flights: user.flights, travelPoints : addPoints })
+
+            return res.status(200).json({message: "user subscribe to flight"});
     } catch (error) {
         console.error(error);
         return res.status(500).send({ err : "Couldn't subscribe to flight" });

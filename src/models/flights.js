@@ -15,13 +15,14 @@ const flightsSchema = new Schema({
 	startTime       : {type: Date, 		required: true},
 	arrivalTime     : {type: Date, 		required: true},
 	totalCapacity   : {type: Number, 	required: true},
+	costPerSeat     : {type: Number, 	required: true},
+	appliedOffer    : {type: Boolean, 	required: false , default : false},
 	currentCapacity : {type: Number, 	required: false, default : 0},
     clientsData		: [{ 
 		clientId	: {ref: "User", type : Schema.Types.ObjectId},
 		accept		: {type : Boolean,	default: false},
 		baggage		: {ref: "Baggage", type : Schema.Types.ObjectId}
 					  }],
-	// costPerSeat     : {type: Number, 	required: true},
 },  {
     timestamps: true,
     versionKey: false

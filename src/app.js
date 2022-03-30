@@ -11,6 +11,8 @@ import usersRoutes from "./routes/users.routes"
 import flightsRoutes from "./routes/flights.routes"
 import baggageRoutes from "./routes/baggages.routes"
 
+import funcionDescuentos from "./controllers/offers.controller"
+
 import {createRoles} from "./libs/initialSetupRoles"
 import {createBaggages} from "./libs/initialSetupBaggages"
 
@@ -19,6 +21,8 @@ const app = express();
 // create users roles
 createRoles();
 createBaggages();
+
+funcionDescuentos
 
 // settings
 app.set("port", process.env.PORT || 3000);

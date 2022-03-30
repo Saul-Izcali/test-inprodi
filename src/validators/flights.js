@@ -14,6 +14,7 @@ flightsValidator.createFlightValidation = [
 	body("startTime").isDate().notEmpty(),
 	body("arrivalTime").isDate().notEmpty(),
 	body("totalCapacity").customSanitizer(Number).custom(value => !isNaN(value) && value >= 5 && value <= 200),
+	body("costPerSeat").customSanitizer(Number).custom(value => !isNaN(value) && value > 0),
 	// body("clientsIds").custom( value => { userClient(value)}),
     (req, res, next) => {
 		validateResult(req, res, next)
