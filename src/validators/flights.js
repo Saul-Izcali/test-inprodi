@@ -5,8 +5,9 @@ import { body, check, param } from "express-validator";
 import validateResult from '../helpers/validateHerlper';
 import  UserModel  from '../models/user'
 
+const flightsValidator = {};
 
-const createFlightValidation = [
+flightsValidator.createFlightValidation = [
     body("nameFlight").notEmpty(),
 	body("origin").notEmpty().isLength({ min : 2 }),
 	body("destination").notEmpty().isLength({ min : 2 }),
@@ -37,14 +38,14 @@ function userClient(value) {
 	})
 }
 
-const flightFilterByName = [
+flightsValidator.flightFilterByName = [
 	body("nameFligth").notEmpty(),
 	(req, res, next) => {
         validateResult(req, res, next)
     }
 ];
 
-const flightFilterByDate = [
+flightsValidator.flightFilterByDate = [
 	body("start").notEmpty().isDate(),
 	body("end").notEmpty().isDate(),
 	(req, res, next) => {
@@ -53,7 +54,7 @@ const flightFilterByDate = [
 ];
 
 
-const modifyFlight = [
+flightsValidator.modifyFlight = [
 	param("id").notEmpty().isMongoId(),
 	body("userId").notEmpty().isMongoId(),
 	(req, res, next) => {
@@ -61,4 +62,13 @@ const modifyFlight = [
     }
 ];
 
-export  {createFlightValidation, flightFilterByName, flightFilterByDate, modifyFlight};
+
+flightsValidator.getFlightByPlace = [
+	body("origin").isString().notEmpty(),
+	body("destination").isString().notEmpty(),
+	(req, res, next) => {
+        validateResult(req, res, next)
+    }
+];
+
+export default flightsValidator;

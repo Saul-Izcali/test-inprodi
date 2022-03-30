@@ -21,6 +21,7 @@ const flightsSchema = new Schema({
 		accept		: {type : Boolean,	default: false},
 		baggage		: {ref: "Baggage", type : Schema.Types.ObjectId}
 					  }],
+	// costPerSeat     : {type: Number, 	required: true},
 },  {
     timestamps: true,
     versionKey: false

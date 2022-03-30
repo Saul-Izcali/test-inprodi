@@ -1,6 +1,6 @@
 //external importation
 import mongoose from 'mongoose'
-
+ 
 // own importation
 import  FlightsModel  from '../models/flights'
 import  UsersModel  from '../models/user'
@@ -18,8 +18,11 @@ const optionsPagination = {
 flightsController.createFlight = async (req, res) => {
     try {
         const newFlights = new FlightsModel(req.body);
-        // console.log(newFlights)
-    
+
+        if(newFlights.clientsData.length >= newFlights.totalCapacity) return res.status(403).json({message: "flight couldn't create, more users than capacity"});
+        
+        newFlights.currentCapacity = newFlights.clientsData.length;
+
         const flight = await newFlights.save();
         console.log("Flight created");
 
@@ -153,7 +156,9 @@ flightsController.subscribeFlight = async (req, res) => {
             let indexClientToDelete = flight.clientsData.map(({clientId}) => clientId.toString()).indexOf(req.body.userId)
 
             // if user isn't found return this status and message
-            if(indexClientToDelete != -1) return res.status(403).json({message: "user cannot subscribre, already in flight"});
+            if(indexClientToDelete != -1) return res.status(403).json({message: "user couldn't susbscribe, already in flight"});
+
+            if(flight.clientsData.length == flight.totalCapacity) return res.status(403).json({message: "user couldn't susbscribe, flight is full"});
 
             const newObjectUsr = {
                 clientId: mongoose.Types.ObjectId(req.body.userId),
@@ -162,6 +167,8 @@ flightsController.subscribeFlight = async (req, res) => {
             };
 
             flight.clientsData.push(newObjectUsr);
+
+            flight.currentCapacity = flight.clientsData.length;
 
         await FlightsModel.findByIdAndUpdate(req.params.id, flight);
 
@@ -210,6 +217,18 @@ flightsController.deleteUsersFlight = async (req, res) => {
     }
 };
 
+
+flightsController.getFlightsByPlace = async (req, res) => {
+    try {
+
+        const flights = await FlightsModel.find({ $and : [ { origin: req.body.origin } , { destination: req.body.destination } ] });
+        
+        return res.status(200).json(flights);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send({ err : "Couldn't deny invitation" });
+    }
+};
 
 
 export default flightsController;
