@@ -1,9 +1,9 @@
-// const { Schema, model } = require('mongoose');
+//external importation
 import { Schema, model } from 'mongoose'
-import roles from './roles';
 
-// Import Own Modules
-// import * as roles from "../access/roles";
+// own importation
+import roles from './roles';
+import flights from './flights';
 
 const userSchema = new Schema({
     userName        : { type : String, required: false},
@@ -12,8 +12,8 @@ const userSchema = new Schema({
 	lastName        : { type : String, required: false},
 	phone           : { type : String, required: false},
     position        : { type : String },
-    flights         : [{ type : String, required: false}],
-    roles           : [{ref: "Role", type : Schema.Types.ObjectId}]
+    flights         : [{ref: "Flight",  type : Schema.Types.ObjectId}], 
+    roles           : [{ref: "Role",    type : Schema.Types.ObjectId}]
     // account_type    : { type : String, enum : Object.values(roles) },
 }, {
     timestamps: true,

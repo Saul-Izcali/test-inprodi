@@ -2,19 +2,23 @@
 import path from "path";
 import express from "express";
 import morgan from "morgan";
-import { create } from "express-handlebars";
 import bodyParser from "body-parser"
+import { create } from "express-handlebars";
 
 // own imports
 import indexRoutes from './routes/index.routes'
 import usersRoutes from "./routes/users.routes"
 import flightsRoutes from "./routes/flights.routes"
-import {createRoles} from "./libs/initialSetup"
+import baggageRoutes from "./routes/baggages.routes"
+
+import {createRoles} from "./libs/initialSetupRoles"
+import {createBaggages} from "./libs/initialSetupBaggages"
 
 const app = express();
 
 // create users roles
 createRoles();
+createBaggages();
 
 // settings
 app.set("port", process.env.PORT || 3000);
@@ -43,6 +47,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(indexRoutes);
 app.use(usersRoutes);
 app.use(flightsRoutes);
+app.use(baggageRoutes);
 
 // public routes
 app.use(express.static(path.join(__dirname, "public")));

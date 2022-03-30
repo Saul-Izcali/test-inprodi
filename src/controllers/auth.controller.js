@@ -27,7 +27,7 @@ authController.login = async (req, res) => {
             }
             if(coinciden == true){
                 const token = jwt.sign({_id: currentUser._id}, process.env.JWT_SECRET, {
-                    expiresIn: 86400
+                    expiresIn: 432000
                 })
 
                 console.log("user is valid")

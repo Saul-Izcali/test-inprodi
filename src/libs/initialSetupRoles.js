@@ -8,7 +8,7 @@ export const createRoles = async () => {
             new rolesModel({name : 'admin'}).save(),
             new rolesModel({name : 'employee'}).save(),
             new rolesModel({name : 'client'}).save()
-        ])
+        ]);
     
         console.log(values)
 

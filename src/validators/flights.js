@@ -1,5 +1,5 @@
 // external importation
-import { body, check } from "express-validator";
+import { body, check, param } from "express-validator";
 
 // own importation
 import validateResult from '../helpers/validateHerlper';
@@ -52,4 +52,13 @@ const flightFilterByDate = [
     }
 ];
 
-export  {createFlightValidation, flightFilterByName, flightFilterByDate};
+
+const modifyFlight = [
+	param("id").notEmpty().isMongoId(),
+	body("userId").notEmpty().isMongoId(),
+	(req, res, next) => {
+        validateResult(req, res, next)
+    }
+];
+
+export  {createFlightValidation, flightFilterByName, flightFilterByDate, modifyFlight};
